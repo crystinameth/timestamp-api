@@ -7,9 +7,9 @@ app.use(express.json());
 app.get('/api/:date', (req, res) => {
     const date = req.params.date;
 
-    const unixTimestamp = Date.parse(date);
+    const unixTimestamp = parseInt(date);
 
-    if(isNaN(unixTimestamp)){
+    if(isNaN(unixTimestamp) || unixTimestamp < 0 || unixTimestamp > 9999999999999 ){
         res.status(400).json({error: 'Invalid date format'});
     } else {
         const unix = unixTimestamp
